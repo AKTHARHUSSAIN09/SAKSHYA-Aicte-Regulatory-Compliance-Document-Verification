@@ -28,7 +28,7 @@ const ATTACK_VECTORS = [
     desc: "Injects Canva/Photoshop creator tags and mismatched font dictionaries into PDF object streams.",
     engine: "PyMuPDF Stream Parser",
     severity: "HIGH",
-    color: "#f59e0b",
+    color: "#B45309",
   },
   {
     id: "EXIF_GPS_FORGERY",
@@ -36,7 +36,7 @@ const ATTACK_VECTORS = [
     desc: "Injects remote off-campus coordinates into laboratory and infrastructure photographs.",
     engine: "Haversine Distance Verifier",
     severity: "HIGH",
-    color: "#f59e0b",
+    color: "#B45309",
   },
   {
     id: "TEMPLATE_CLONING",
@@ -151,13 +151,13 @@ export default function AttackLabPage() {
           {/* Left: attack selector (5 cols) */}
           <div
             className="lg:col-span-5 rounded-xl overflow-hidden"
-            style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
           >
             <div
               className="px-5 py-4"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
             >
-              <h3 className="text-sm font-bold text-white">Synthetic Tampering Suite</h3>
+              <h3 className="text-sm font-bold text-slate-900">Synthetic Tampering Suite</h3>
               <p className="text-xs text-slate-500 mt-0.5">
                 Select an adversarial perturbation to benchmark
               </p>
@@ -179,13 +179,13 @@ export default function AttackLabPage() {
                             transform: "scale(1.01)",
                           }
                         : {
-                            background: "rgba(255,255,255,0.025)",
-                            border: "1px solid rgba(255,255,255,0.06)",
+                            background: "rgba(15,21,53,0.04)",
+                            border: "1px solid rgba(15,21,53,0.096)",
                           }
                     }
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-xs font-semibold text-slate-100 leading-snug">
+                      <span className="text-xs font-semibold text-slate-900 leading-snug">
                         {atk.name}
                       </span>
                       <span
@@ -200,7 +200,7 @@ export default function AttackLabPage() {
                       </span>
                     </div>
                     <p className="text-[11px] text-slate-500 leading-relaxed">{atk.desc}</p>
-                    <div className="flex items-center gap-1.5 text-[10px] text-indigo-400 font-mono">
+                    <div className="flex items-center gap-1.5 text-[10px] text-indigo-700 font-mono">
                       <Target className="w-3 h-3" />
                       {atk.engine}
                     </div>
@@ -240,11 +240,11 @@ export default function AttackLabPage() {
               >
                 <div
                   className="flex items-center justify-between px-5 py-4"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                  style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
                 >
                   <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm font-bold text-white">Detector Result</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                    <span className="text-sm font-bold text-slate-900">Detector Result</span>
                   </div>
                   <span className="badge badge-emerald">{result.detection_status}</span>
                 </div>
@@ -258,10 +258,10 @@ export default function AttackLabPage() {
                       <div
                         key={label}
                         className="rounded-xl p-4 space-y-1"
-                        style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.05)" }}
+                        style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(15,21,53,0.08)" }}
                       >
                         <div className="text-[10px] text-slate-500">{label}</div>
-                        <div className="text-xs font-semibold text-slate-100">{val}</div>
+                        <div className="text-xs font-semibold text-slate-900">{val}</div>
                         <div
                           className="text-[10px] font-mono"
                           style={{ color: highlight ? "#f43f5e" : "#64748b" }}
@@ -276,27 +276,27 @@ export default function AttackLabPage() {
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-[10px] text-slate-500">Fraud Confidence Score</span>
-                      <span className="text-xs font-bold text-rose-400">{scorePercent}%</span>
+                      <span className="text-xs font-bold text-rose-600">{scorePercent}%</span>
                     </div>
                     <div
                       className="h-2 rounded-full overflow-hidden"
-                      style={{ background: "rgba(255,255,255,0.06)" }}
+                      style={{ background: "rgba(15,21,53,0.096)" }}
                     >
                       <div
                         className="h-full rounded-full transition-all duration-700"
                         style={{
                           width: `${scorePercent}%`,
-                          background: "linear-gradient(90deg, #f59e0b, #f43f5e)",
+                          background: "linear-gradient(90deg, #B45309, #f43f5e)",
                         }}
                       />
                     </div>
                   </div>
 
                   <div
-                    className="rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed"
-                    style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.05)" }}
+                    className="rounded-xl p-3.5 text-xs text-slate-700 leading-relaxed"
+                    style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(15,21,53,0.08)" }}
                   >
-                    <span className="font-semibold text-white">Proof: </span>
+                    <span className="font-semibold text-slate-900">Proof: </span>
                     {result.explanation}
                   </div>
                 </div>
@@ -306,13 +306,13 @@ export default function AttackLabPage() {
             {/* Live upload sandbox */}
             <div
               className="rounded-xl overflow-hidden"
-              style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
             >
               <div
                 className="px-5 py-4"
-                style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
               >
-                <h3 className="text-sm font-bold text-white">Live Certificate Sandbox</h3>
+                <h3 className="text-sm font-bold text-slate-900">Live Certificate Sandbox</h3>
                 <p className="text-xs text-slate-500 mt-0.5">
                   Upload any PDF or image to test the detector in real time
                 </p>
@@ -339,10 +339,10 @@ export default function AttackLabPage() {
                     onChange={handleUpload}
                   />
                   <UploadCloud
-                    className={`w-8 h-8 text-indigo-400 ${uploadLoading ? "animate-bounce" : ""}`}
+                    className={`w-8 h-8 text-indigo-700 ${uploadLoading ? "animate-bounce" : ""}`}
                   />
                   <div className="text-center">
-                    <div className="text-sm font-semibold text-slate-200">
+                    <div className="text-sm font-semibold text-slate-800">
                       {uploadLoading
                         ? "Parsing PDF streams & computing ELA…"
                         : "Drop PDF or Image here"}
@@ -363,9 +363,9 @@ export default function AttackLabPage() {
                   >
                     <div
                       className="flex items-center justify-between pb-3"
-                      style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                      style={{ borderBottom: "1px solid rgba(15,21,53,0.08)" }}
                     >
-                      <span className="text-xs font-bold text-white">
+                      <span className="text-xs font-bold text-slate-900">
                         {uploadReport.file_name}
                       </span>
                       <span className="badge badge-rose">
@@ -378,10 +378,10 @@ export default function AttackLabPage() {
                         <div
                           key={i}
                           className="rounded-lg p-3 space-y-1.5 text-xs"
-                          style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.05)" }}
+                          style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(15,21,53,0.08)" }}
                         >
-                          <div className="font-semibold text-indigo-300">{f.title}</div>
-                          <p className="text-slate-400 leading-relaxed">{f.description}</p>
+                          <div className="font-semibold text-indigo-600">{f.title}</div>
+                          <p className="text-slate-600 leading-relaxed">{f.description}</p>
                           {f.visual_evidence_b64 && (
                             <img
                               src={f.visual_evidence_b64}

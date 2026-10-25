@@ -44,9 +44,9 @@ const NAV_GROUPS: Record<string, string> = {
 };
 
 const ENGINE_STATUS = [
-  { label: "Z3 SMT Solver",  status: "SAT",    color: "#10b981" },
-  { label: "OpenCV ELA",     status: "READY",  color: "#f5a623" },
-  { label: "Timeline DAG",   status: "ACTIVE", color: "#3b82f6" },
+  { label: "Z3 SMT Solver",  status: "SAT",    color: "#059669" },
+  { label: "OpenCV ELA",     status: "READY",  color: "#1E2A78" },
+  { label: "Timeline DAG",   status: "ACTIVE", color: "#2563EB" },
 ];
 
 export default function SidebarLayout({ children }: SidebarLayoutProps) {
@@ -76,34 +76,34 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
         style={{
-          background: "linear-gradient(180deg, #04091a 0%, #060d1e 100%)",
-          borderRight: "1px solid rgba(245,166,35,0.08)",
+          background: "linear-gradient(180deg, #ffffff 0%, #F8F9FD 100%)",
+          borderRight: "1px solid rgba(30,42,120,0.08)",
         }}
       >
         {/* Brand mark */}
         <div
           className="flex items-center gap-3 px-5 py-5"
-          style={{ borderBottom: "1px solid rgba(245,166,35,0.08)" }}
+          style={{ borderBottom: "1px solid rgba(30,42,120,0.08)" }}
         >
           {/* Seal-style logo */}
           <div
             className="relative w-9 h-9 rounded-full flex items-center justify-center shrink-0"
             style={{
-              background: "linear-gradient(135deg, #92600a, #f5a623, #c8820f)",
-              boxShadow: "0 0 0 2px rgba(245,166,35,0.18), 0 4px 14px rgba(245,166,35,0.25)",
+              background: "linear-gradient(135deg, #151F5C, #1E2A78, #2B3A9E)",
+              boxShadow: "0 0 0 2px rgba(30,42,120,0.18), 0 4px 14px rgba(30,42,120,0.25)",
             }}
           >
-            <Scale className="w-4 h-4" style={{ color: "#0a0a0a" }} />
+            <Scale className="w-4 h-4" style={{ color: "#ffffff" }} />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span
                 className="font-black text-base tracking-[0.22em] leading-none"
                 style={{
-                  background: "linear-gradient(90deg, #f5a623, #fbbf24, #fff0a3)",
+                  background: "linear-gradient(90deg, #1E2A78, #3347B0, #F28C28)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 0 8px rgba(245,166,35,0.28))",
+                  filter: "drop-shadow(0 0 8px rgba(30,42,120,0.28))",
                 }}
               >
                 SAKSHYA
@@ -156,8 +156,8 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                       style={
                         isActive
                           ? {
-                              background: "linear-gradient(90deg, rgba(245,166,35,0.12), rgba(245,166,35,0.04))",
-                              border: "1px solid rgba(245,166,35,0.18)",
+                              background: "linear-gradient(90deg, rgba(30,42,120,0.12), rgba(30,42,120,0.04))",
+                              border: "1px solid rgba(30,42,120,0.18)",
                             }
                           : {
                               border: "1px solid transparent",
@@ -169,7 +169,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                       {isActive && (
                         <span
                           className="absolute left-0 top-[20%] bottom-[20%] w-[2px] rounded-r-full"
-                          style={{ background: "var(--amber)" }}
+                          style={{ background: "var(--accent)" }}
                         />
                       )}
 
@@ -190,14 +190,14 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                         style={
                           isActive
                             ? {
-                                background: "rgba(245,166,35,0.15)",
+                                background: "rgba(30,42,120,0.15)",
                                 color: "var(--amber)",
-                                border: "1px solid rgba(245,166,35,0.25)",
+                                border: "1px solid rgba(30,42,120,0.25)",
                               }
                             : {
-                                background: "rgba(255,255,255,0.03)",
+                                background: "rgba(15,21,53,0.048)",
                                 color: "var(--text-faint)",
-                                border: "1px solid rgba(255,255,255,0.06)",
+                                border: "1px solid rgba(15,21,53,0.096)",
                               }
                         }
                       >
@@ -215,8 +215,8 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         <div
           className="mx-3 mb-3 rounded-xl p-3.5 space-y-2.5"
           style={{
-            background: "rgba(245,166,35,0.03)",
-            border: "1px solid rgba(245,166,35,0.08)",
+            background: "rgba(30,42,120,0.03)",
+            border: "1px solid rgba(30,42,120,0.08)",
           }}
         >
           <div className="flex items-center gap-2 mb-1">
@@ -263,7 +263,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           className="sticky top-0 z-30 h-13 flex items-center px-5 xl:px-8 gap-4"
           style={{
             background: "rgba(3,7,15,0.88)",
-            borderBottom: "1px solid rgba(245,166,35,0.07)",
+            borderBottom: "1px solid rgba(30,42,120,0.07)",
             backdropFilter: "blur(18px)",
             height: "3.25rem",
           }}
@@ -303,20 +303,20 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
             <div
               className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px]"
               style={{
-                background: "rgba(5,150,105,0.08)",
-                border: "1px solid rgba(5,150,105,0.18)",
+                background: "rgba(4,120,87,0.08)",
+                border: "1px solid rgba(4,120,87,0.18)",
               }}
             >
               <span
                 className="w-1.5 h-1.5 rounded-full"
                 style={{
                   background: "var(--emerald-bright)",
-                  boxShadow: "0 0 6px #10b981",
+                  boxShadow: "0 0 6px #059669",
                 }}
               />
               <span
                 className="font-semibold"
-                style={{ color: "#6ee7b7" }}
+                style={{ color: "#047857" }}
               >
                 Sr. Scrutiny Officer
               </span>
@@ -330,7 +330,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
               style={{ color: "var(--text-muted)" }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.color = "var(--amber)";
-                (e.currentTarget as HTMLElement).style.background = "rgba(245,166,35,0.06)";
+                (e.currentTarget as HTMLElement).style.background = "rgba(30,42,120,0.06)";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.color = "var(--text-muted)";

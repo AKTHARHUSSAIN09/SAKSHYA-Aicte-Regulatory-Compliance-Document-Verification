@@ -25,36 +25,36 @@ const METRIC_CARDS = [
   {
     label: "Applications in Queue",
     icon: Building2,
-    color: "#f5a623",
-    bgColor: "rgba(245,166,35,0.07)",
-    borderColor: "rgba(245,166,35,0.16)",
+    color: "#1E2A78",
+    bgColor: "rgba(30,42,120,0.07)",
+    borderColor: "rgba(30,42,120,0.16)",
     key: "total",
     sub: "Intake checklists populated",
   },
   {
     label: "Critical Alerts",
     icon: AlertTriangle,
-    color: "#ef4444",
-    bgColor: "rgba(220,38,38,0.07)",
-    borderColor: "rgba(220,38,38,0.18)",
+    color: "#DC2626",
+    bgColor: "rgba(198,40,40,0.07)",
+    borderColor: "rgba(198,40,40,0.18)",
     key: "alerts",
     sub: "ELA pixel splicing detected",
   },
   {
     label: "Compliant Institutions",
     icon: CheckCircle2,
-    color: "#10b981",
-    bgColor: "rgba(5,150,105,0.07)",
-    borderColor: "rgba(5,150,105,0.18)",
+    color: "#059669",
+    bgColor: "rgba(4,120,87,0.07)",
+    borderColor: "rgba(4,120,87,0.18)",
     key: "compliant",
     sub: "Zero shortfall across norms",
   },
   {
     label: "Rule Contradictions",
     icon: Clock,
-    color: "#3b82f6",
-    bgColor: "rgba(59,130,246,0.07)",
-    borderColor: "rgba(59,130,246,0.18)",
+    color: "#2563EB",
+    bgColor: "rgba(37,99,235,0.07)",
+    borderColor: "rgba(37,99,235,0.18)",
     key: "conflicts",
     sub: "Z3 theorem prover flagged",
   },
@@ -151,7 +151,7 @@ export default function CommandCenterPage() {
               style={{ background: bgColor, border: `1px solid ${borderColor}` }}
             >
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-slate-400">{label}</span>
+                <span className="text-[11px] font-semibold text-slate-600">{label}</span>
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center"
                   style={{ background: `${color}20` }}
@@ -172,16 +172,16 @@ export default function CommandCenterPage() {
           className="rounded-xl overflow-hidden"
           style={{
             background: "var(--bg-surface)",
-            border: "1px solid rgba(255,255,255,0.06)",
+            border: "1px solid rgba(15,21,53,0.096)",
           }}
         >
           {/* Table header bar */}
           <div
             className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 py-5"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
           >
             <div>
-              <h2 className="text-sm font-bold text-white">
+              <h2 className="text-sm font-bold text-slate-900">
                 Institutional Applications Directory
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -203,7 +203,7 @@ export default function CommandCenterPage() {
                   <button
                     type="button"
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-slate-500 transition hover:bg-white/10 hover:text-slate-200"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-slate-500 transition hover:bg-slate-900/5 hover:text-slate-800"
                     aria-label="Clear application search"
                     title="Clear search"
                   >
@@ -228,8 +228,8 @@ export default function CommandCenterPage() {
 
           {loadError && (
             <div
-              className="mx-6 mb-5 rounded-lg px-4 py-3 text-xs text-rose-200"
-              style={{ background: "rgba(220,38,38,0.09)", border: "1px solid rgba(220,38,38,0.22)" }}
+              className="mx-6 mb-5 rounded-lg px-4 py-3 text-xs text-rose-800"
+              style={{ background: "rgba(198,40,40,0.09)", border: "1px solid rgba(198,40,40,0.22)" }}
               role="alert"
             >
               {loadError}
@@ -269,13 +269,13 @@ export default function CommandCenterPage() {
                       return (
                         <tr key={app.institution_id}>
                           <td className="pr-4">
-                            <span className="font-mono text-indigo-400 font-semibold text-xs">
+                            <span className="font-mono text-indigo-700 font-semibold text-xs">
                               {app.application_reference_number ?? app.institution_id}
                             </span>
                             <div className="mt-0.5 text-[10px] text-slate-500">{app.permanent_id ?? app.institution_id} · {app.application_category ?? "EOA"}</div>
                           </td>
                           <td className="pr-4">
-                            <div className="font-semibold text-slate-100 text-xs">
+                            <div className="font-semibold text-slate-900 text-xs">
                               {app.institution_name}
                             </div>
                             <div className="text-[10px] text-slate-500 mt-0.5">
@@ -289,14 +289,14 @@ export default function CommandCenterPage() {
                             <span
                               className="font-mono text-xs font-semibold"
                               style={{
-                                color: app.land_acres < 2.5 ? "#f59e0b" : "#10b981",
+                                color: app.land_acres < 2.5 ? "#B45309" : "#059669",
                               }}
                             >
                               {app.land_acres} ac
                             </span>
                           </td>
                           <td className="pr-4">
-                            <span className="font-mono text-xs text-slate-400">
+                            <span className="font-mono text-xs text-slate-600">
                               {app.faculty_count}
                             </span>
                           </td>
@@ -326,21 +326,21 @@ export default function CommandCenterPage() {
                               style={
                                 isFraud
                                   ? {
-                                      background: "rgba(220,38,38,0.08)",
-                                      border: "1px solid rgba(220,38,38,0.25)",
-                                      color: "#fca5a5",
+                                      background: "rgba(198,40,40,0.08)",
+                                      border: "1px solid rgba(198,40,40,0.25)",
+                                      color: "#B91C1C",
                                     }
                                   : isReview
                                   ? {
-                                      background: "rgba(245,158,11,0.08)",
-                                      border: "1px solid rgba(245,158,11,0.25)",
-                                      color: "#fcd34d",
+                                      background: "rgba(180,83,9,0.08)",
+                                      border: "1px solid rgba(180,83,9,0.25)",
+                                      color: "#92400E",
                                     }
                                   : {
-                                      background: "linear-gradient(135deg,#c87d0e,#f5a623)",
-                                      color: "#0a0a0a",
+                                      background: "linear-gradient(135deg,#151F5C,#1E2A78)",
+                                      color: "#ffffff",
                                       fontWeight: 800,
-                                      boxShadow: "0 2px 10px rgba(245,166,35,0.25)",
+                                      boxShadow: "0 2px 10px rgba(30,42,120,0.25)",
                                     }
                               }
                             >

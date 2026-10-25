@@ -96,7 +96,7 @@ function ScrutinyContent() {
           <div>
             <button
               onClick={() => router.push("/")}
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition mb-3"
+              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700 transition mb-3"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Command Center
@@ -113,8 +113,8 @@ function ScrutinyContent() {
                 className="badge"
                 style={
                   isFraud
-                    ? { background: "rgba(244,63,94,0.12)", color: "#fda4af", border: "1px solid rgba(244,63,94,0.28)", padding: "0.25rem 0.75rem", fontSize: "0.625rem" }
-                    : { background: "rgba(16,185,129,0.12)", color: "#6ee7b7", border: "1px solid rgba(16,185,129,0.28)", padding: "0.25rem 0.75rem", fontSize: "0.625rem" }
+                    ? { background: "rgba(244,63,94,0.12)", color: "#BE123C", border: "1px solid rgba(244,63,94,0.28)", padding: "0.25rem 0.75rem", fontSize: "0.625rem" }
+                    : { background: "rgba(16,185,129,0.12)", color: "#047857", border: "1px solid rgba(16,185,129,0.28)", padding: "0.25rem 0.75rem", fontSize: "0.625rem" }
                 }
               >
                 {isFraud ? "CRITICAL DEFICIENCIES" : "COMPLIANT"}
@@ -159,15 +159,15 @@ function ScrutinyContent() {
           {/* Left: document canvas (5 cols) */}
           <div
             className="lg:col-span-5 rounded-xl overflow-hidden"
-            style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
           >
             {/* Tabs */}
             <div
               className="flex items-center gap-1 p-4"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
             >
-              <FileText className="w-3.5 h-3.5 text-indigo-400 mr-2" />
-              <span className="text-xs font-bold text-white flex-1">Document Canvas</span>
+              <FileText className="w-3.5 h-3.5 text-indigo-700 mr-2" />
+              <span className="text-xs font-bold text-slate-900 flex-1">Document Canvas</span>
               {["land_deed", "fire_noc"].map((tab) => (
                 <button
                   key={tab}
@@ -175,7 +175,7 @@ function ScrutinyContent() {
                   className="text-[11px] font-semibold px-3 py-1.5 rounded-lg transition"
                   style={
                     activeDocTab === tab
-                      ? { background: "rgba(99,102,241,0.2)", color: "#a5b4fc" }
+                      ? { background: "rgba(99,102,241,0.2)", color: "#4338CA" }
                       : { color: "#475569" }
                   }
                 >
@@ -189,19 +189,19 @@ function ScrutinyContent() {
               {/* Doc header */}
               <div
                 className="pb-4 space-y-1"
-                style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                style={{ borderBottom: "1px solid rgba(15,21,53,0.08)" }}
               >
                 <div className="text-[9px] uppercase font-mono tracking-widest text-slate-600">
                   Official Record · State Revenue & Statutory Filing
                 </div>
-                <div className="text-xs font-semibold text-slate-300">
+                <div className="text-xs font-semibold text-slate-700">
                   {activeDocTab === "land_deed"
                     ? "Schedule of Immovable Property & Deed of Transfer"
                     : "State Fire & Rescue Services · No Objection Certificate"}
                 </div>
               </div>
 
-              <p className="text-xs text-slate-400 leading-relaxed font-serif">
+              <p className="text-xs text-slate-600 leading-relaxed font-serif">
                 This instrument is executed in favor of the applicant educational trust for educational purposes.
               </p>
 
@@ -212,19 +212,19 @@ function ScrutinyContent() {
                   className="w-full text-left rounded-xl p-4 transition-all"
                   style={
                     selectedBBox === "land_area_acres"
-                      ? { background: "rgba(245,158,11,0.08)", border: "2px solid rgba(245,158,11,0.5)" }
+                      ? { background: "rgba(180,83,9,0.08)", border: "2px solid rgba(180,83,9,0.5)" }
                       : { background: "rgba(99,102,241,0.04)", border: "2px solid rgba(99,102,241,0.2)" }
                   }
                 >
-                  <div className="flex justify-between text-[9px] font-mono text-amber-400 font-bold mb-2">
+                  <div className="flex justify-between text-[9px] font-mono text-amber-700 font-bold mb-2">
                     <span>BBOX [X1:105 Y1:310 X2:275 Y2:340]</span>
                     <span>98.4% conf.</span>
                   </div>
-                  <div className="text-sm text-slate-100 font-semibold">
+                  <div className="text-sm text-slate-900 font-semibold">
                     "Total Land Parcel: {isFraud ? "2.10 Acres" : "2.85 Acres"} at Khasra No. 991/B"
                   </div>
                   {isFraud && (
-                    <div className="mt-2 text-[10px] text-amber-400">
+                    <div className="mt-2 text-[10px] text-amber-700">
                       ⚠ ELA variance hotspot: pixel compression indicates "1.75" spliced to "2.10"
                     </div>
                   )}
@@ -241,15 +241,15 @@ function ScrutinyContent() {
                       : { background: "rgba(99,102,241,0.04)", border: "2px solid rgba(99,102,241,0.2)" }
                   }
                 >
-                  <div className="flex justify-between text-[9px] font-mono text-rose-400 font-bold mb-2">
+                  <div className="flex justify-between text-[9px] font-mono text-rose-600 font-bold mb-2">
                     <span>BBOX [X1:85 Y1:190 X2:310 Y2:215]</span>
                     <span>EXPIRED</span>
                   </div>
-                  <div className="text-sm text-slate-100 font-semibold">
+                  <div className="text-sm text-slate-900 font-semibold">
                     "Valid From: 2021-01-10 to 2023-01-09"
                   </div>
                   {isFraud && (
-                    <div className="mt-2 text-[10px] text-rose-400">
+                    <div className="mt-2 text-[10px] text-rose-600">
                       ⚠ Expired 16 months before portal application submission.
                     </div>
                   )}
@@ -263,10 +263,10 @@ function ScrutinyContent() {
               {/* Footer stamp */}
               <div
                 className="pt-4 flex items-center justify-between text-[10px] font-mono"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+                style={{ borderTop: "1px solid rgba(15,21,53,0.08)" }}
               >
                 <span className="text-slate-600">SHA-256: e3b0c44298fc…</span>
-                <span className="text-emerald-500">DIGITALLY PARSED</span>
+                <span className="text-emerald-700">DIGITALLY PARSED</span>
               </div>
             </div>
           </div>
@@ -275,9 +275,9 @@ function ScrutinyContent() {
           <div className="lg:col-span-7 space-y-4">
             <div
               className="rounded-xl p-5"
-              style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
             >
-              <h3 className="text-sm font-bold text-white">Compliance Proofs</h3>
+              <h3 className="text-sm font-bold text-slate-900">Compliance Proofs</h3>
               <p className="text-xs text-slate-500 mt-0.5">
                 Formally verified by the Z3 SMT solver against AICTE Handbook clauses.
               </p>
@@ -297,19 +297,19 @@ function ScrutinyContent() {
                           ? { background: "rgba(16,185,129,0.04)", border: "1px solid rgba(16,185,129,0.15)" }
                           : item.status === "DEFICIENT"
                           ? { background: "rgba(244,63,94,0.05)", border: "1px solid rgba(244,63,94,0.2)" }
-                          : { background: "rgba(245,158,11,0.05)", border: "1px solid rgba(245,158,11,0.2)" }
+                          : { background: "rgba(180,83,9,0.05)", border: "1px solid rgba(180,83,9,0.2)" }
                       }
                     >
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-2.5">
                           {item.status === "COMPLIANT" ? (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                            <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                           ) : item.status === "DEFICIENT" ? (
-                            <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                            <XCircle className="w-4 h-4 text-rose-600 shrink-0" />
                           ) : (
-                            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                            <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
                           )}
-                          <span className="font-semibold text-sm text-white">{item.rule_title}</span>
+                          <span className="font-semibold text-sm text-slate-900">{item.rule_title}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="badge badge-indigo">{item.clause_reference}</span>
@@ -317,10 +317,10 @@ function ScrutinyContent() {
                             className="badge"
                             style={
                               item.status === "COMPLIANT"
-                                ? { background: "rgba(16,185,129,0.12)", color: "#6ee7b7", border: "1px solid rgba(16,185,129,0.22)" }
+                                ? { background: "rgba(16,185,129,0.12)", color: "#047857", border: "1px solid rgba(16,185,129,0.22)" }
                                 : item.status === "DEFICIENT"
-                                ? { background: "rgba(244,63,94,0.12)", color: "#fda4af", border: "1px solid rgba(244,63,94,0.22)" }
-                                : { background: "rgba(245,158,11,0.12)", color: "#fcd34d", border: "1px solid rgba(245,158,11,0.22)" }
+                                ? { background: "rgba(244,63,94,0.12)", color: "#BE123C", border: "1px solid rgba(244,63,94,0.22)" }
+                                : { background: "rgba(180,83,9,0.12)", color: "#92400E", border: "1px solid rgba(180,83,9,0.22)" }
                             }
                           >
                             {item.status}
@@ -336,14 +336,14 @@ function ScrutinyContent() {
                         ].map(({ label, val }) => (
                           <div key={label}>
                             <span className="text-[10px] text-slate-500 block">{label}</span>
-                            <span className="font-semibold text-slate-200 text-xs">{val}</span>
+                            <span className="font-semibold text-slate-800 text-xs">{val}</span>
                           </div>
                         ))}
                       </div>
 
                       <div
-                        className="pt-3 text-xs text-slate-400 leading-relaxed"
-                        style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+                        className="pt-3 text-xs text-slate-600 leading-relaxed"
+                        style={{ borderTop: "1px solid rgba(15,21,53,0.08)" }}
                       >
                         <span className="text-slate-500 font-medium">Proof: </span>
                         {item.explanation}
@@ -361,29 +361,29 @@ function ScrutinyContent() {
           <div className="modal-box">
             <div
               className="flex items-center justify-between pb-4 mb-5"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+              style={{ borderBottom: "1px solid rgba(15,21,53,0.112)" }}
             >
               <div>
-                <h3 className="font-bold text-white">Dispatch Deficiency Notice</h3>
+                <h3 className="font-bold text-slate-900">Dispatch Deficiency Notice</h3>
                 <p className="text-xs text-slate-500 mt-0.5">
                   15-day statutory rectification period
                 </p>
               </div>
               <button
                 onClick={() => setNoticeOpen(false)}
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/10"
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-900/5"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <p className="text-xs text-slate-400 mb-4">
+            <p className="text-xs text-slate-600 mb-4">
               Issue a formal notice to{" "}
-              <span className="text-white font-semibold">{brief?.institution_name}</span>.
+              <span className="text-slate-900 font-semibold">{brief?.institution_name}</span>.
             </p>
 
             <div>
-              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+              <label className="block text-xs text-slate-600 mb-1.5 font-medium">
                 Rectification Directives
               </label>
               <textarea
@@ -397,17 +397,17 @@ function ScrutinyContent() {
 
             {noticeSuccess && (
               <div
-                className="mt-4 rounded-xl p-3 flex items-center gap-2 text-xs text-emerald-300"
+                className="mt-4 rounded-xl p-3 flex items-center gap-2 text-xs text-emerald-800"
                 style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)" }}
               >
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                 Notice dispatched and entered into the legal audit ledger.
               </div>
             )}
 
             <div
               className="flex justify-end gap-2.5 pt-5 mt-5"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+              style={{ borderTop: "1px solid rgba(15,21,53,0.112)" }}
             >
               <button onClick={() => setNoticeOpen(false)} className="btn btn-ghost">
                 Cancel

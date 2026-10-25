@@ -39,10 +39,10 @@ export default function RegulatoryTimeMachinePage() {
 
   const statusColor = (s: string) =>
     s?.includes("COMPLIANT") || s?.includes("APPROVE")
-      ? "#10b981"
+      ? "#059669"
       : s?.includes("REJECT") || s?.includes("DEFICIENT")
       ? "#f43f5e"
-      : "#f59e0b";
+      : "#B45309";
 
   return (
     <SidebarLayout>
@@ -63,13 +63,13 @@ export default function RegulatoryTimeMachinePage() {
         {/* ── Scenario builder ─────────────────────── */}
         <div
           className="rounded-xl p-6 space-y-5"
-          style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
         >
           <div
             className="pb-4"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
           >
-            <h2 className="text-sm font-bold text-white">Correction Scenario Builder</h2>
+            <h2 className="text-sm font-bold text-slate-900">Correction Scenario Builder</h2>
             <p className="text-xs text-slate-500 mt-0.5">
               Adjust parameters below and run a hypothetical re-assessment
             </p>
@@ -77,7 +77,7 @@ export default function RegulatoryTimeMachinePage() {
 
           <div className="grid sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+              <label className="block text-xs text-slate-600 mb-1.5 font-medium">
                 Application ID
               </label>
               <input
@@ -87,7 +87,7 @@ export default function RegulatoryTimeMachinePage() {
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+              <label className="block text-xs text-slate-600 mb-1.5 font-medium">
                 Corrected Land Area (acres)
               </label>
               <input
@@ -101,7 +101,7 @@ export default function RegulatoryTimeMachinePage() {
             <div className="flex flex-col justify-end">
               <label
                 className="flex items-center gap-3 p-3.5 rounded-xl cursor-pointer"
-                style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)" }}
+                style={{ border: "1px solid rgba(15,21,53,0.112)", background: "rgba(15,21,53,0.048)" }}
               >
                 <input
                   type="checkbox"
@@ -109,7 +109,7 @@ export default function RegulatoryTimeMachinePage() {
                   onChange={(e) => setFireValid(e.target.checked)}
                   className="w-4 h-4 accent-indigo-500"
                 />
-                <span className="text-xs text-slate-300 font-medium">
+                <span className="text-xs text-slate-700 font-medium">
                   Fire NOC is valid
                 </span>
               </label>
@@ -154,7 +154,7 @@ export default function RegulatoryTimeMachinePage() {
                 >
                   <div>
                     <div className="text-[10px] text-slate-500 uppercase tracking-wider">{note}</div>
-                    <div className="text-sm font-bold text-white mt-0.5">{label}</div>
+                    <div className="text-sm font-bold text-slate-900 mt-0.5">{label}</div>
                   </div>
                   <div
                     className="text-xl font-black"
@@ -162,7 +162,7 @@ export default function RegulatoryTimeMachinePage() {
                   >
                     {status}
                   </div>
-                  <div className="text-xs text-slate-400">
+                  <div className="text-xs text-slate-600">
                     {deficiencies} deficienc{deficiencies === 1 ? "y" : "ies"}
                   </div>
                 </div>
@@ -172,13 +172,13 @@ export default function RegulatoryTimeMachinePage() {
             {/* Rule changes */}
             <div
               className="rounded-xl overflow-hidden"
-              style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
             >
               <div
                 className="px-6 py-4"
-                style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
               >
-                <h3 className="text-sm font-bold text-white">Rule Outcome Changes</h3>
+                <h3 className="text-sm font-bold text-slate-900">Rule Outcome Changes</h3>
                 <p className="text-xs text-slate-500 mt-0.5">
                   Rules whose status flipped between the two scenarios
                 </p>
@@ -191,9 +191,9 @@ export default function RegulatoryTimeMachinePage() {
                       <div
                         key={change.rule_id}
                         className="flex items-center gap-4 rounded-xl p-4"
-                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}
+                        style={{ background: "rgba(15,21,53,0.048)", border: "1px solid rgba(15,21,53,0.08)" }}
                       >
-                        <span className="font-mono text-xs text-indigo-400 font-bold w-40 shrink-0">
+                        <span className="font-mono text-xs text-indigo-700 font-bold w-40 shrink-0">
                           {change.rule_id}
                         </span>
                         <div className="flex items-center gap-3 text-xs">

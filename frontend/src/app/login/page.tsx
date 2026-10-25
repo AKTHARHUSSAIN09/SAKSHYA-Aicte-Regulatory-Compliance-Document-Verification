@@ -38,7 +38,7 @@ export default function LoginPage() {
   return (
     <main
       className="min-h-screen flex items-center justify-center p-5"
-      style={{ background: "#050911" }}
+      style={{ background: "#F4F5FA" }}
     >
       {/* Background radials */}
       <div
@@ -54,7 +54,7 @@ export default function LoginPage() {
         className="relative z-10 w-full max-w-5xl rounded-2xl overflow-hidden grid lg:grid-cols-[1fr_1fr]"
         style={{
           background: "rgba(9,14,26,0.95)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          border: "1px solid rgba(15,21,53,0.128)",
           boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
         }}
       >
@@ -62,8 +62,8 @@ export default function LoginPage() {
         <div
           className="hidden lg:flex flex-col justify-between p-10 relative overflow-hidden"
           style={{
-            background: "linear-gradient(160deg, rgba(245,166,35,0.08) 0%, rgba(59,130,246,0.05) 100%)",
-            borderRight: "1px solid rgba(245,166,35,0.08)",
+            background: "linear-gradient(160deg, rgba(30,42,120,0.08) 0%, rgba(37,99,235,0.05) 100%)",
+            borderRight: "1px solid rgba(30,42,120,0.08)",
           }}
         >
           {/* Noise texture */}
@@ -74,16 +74,16 @@ export default function LoginPage() {
             <span
               className="w-9 h-9 rounded-full flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, #92600a, #f5a623)",
-                boxShadow: "0 4px 14px rgba(245,166,35,0.3)",
+                background: "linear-gradient(135deg, #151F5C, #1E2A78)",
+                boxShadow: "0 4px 14px rgba(30,42,120,0.3)",
               }}
             >
-              <Scale className="w-4 h-4" style={{ color: "#0a0a0a" }} />
+              <Scale className="w-4 h-4" style={{ color: "#ffffff" }} />
             </span>
             <b
               className="tracking-[0.2em] text-sm font-black"
               style={{
-                background: "linear-gradient(90deg, #f5a623, #fbbf24)",
+                background: "linear-gradient(90deg, #1E2A78, #3347B0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -97,16 +97,16 @@ export default function LoginPage() {
             <div
               className="w-11 h-11 rounded-xl flex items-center justify-center"
               style={{
-                background: "rgba(245,166,35,0.1)",
-                border: "1px solid rgba(245,166,35,0.2)",
+                background: "rgba(30,42,120,0.1)",
+                border: "1px solid rgba(30,42,120,0.2)",
               }}
             >
-              <ShieldCheck className="w-5 h-5" style={{ color: "#f5a623" }} />
+              <ShieldCheck className="w-5 h-5" style={{ color: "#1E2A78" }} />
             </div>
-            <h1 className="text-4xl font-black leading-tight" style={{ color: "#e8edf5" }}>
+            <h1 className="text-4xl font-black leading-tight" style={{ color: "#0F1535" }}>
               Scrutiny, with a<br />chain of proof.
             </h1>
-            <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
+            <p className="text-sm leading-relaxed text-slate-600 max-w-sm">
               A governed workspace for evidence, rules, human review,
               and final regulatory decisions.
             </p>
@@ -118,12 +118,12 @@ export default function LoginPage() {
                 "Multi-layer document forensics",
                 "Immutable audit trail",
               ].map((f) => (
-                <div key={f} className="flex items-center gap-3 text-sm" style={{ color: "#8b99b5" }}>
+                <div key={f} className="flex items-center gap-3 text-sm" style={{ color: "#4A5170" }}>
                   <div
                     className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                    style={{ background: "rgba(245,166,35,0.15)" }}
+                    style={{ background: "rgba(30,42,120,0.15)" }}
                   >
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#f5a623" }} />
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#1E2A78" }} />
                   </div>
                   {f}
                 </div>
@@ -142,12 +142,12 @@ export default function LoginPage() {
             {/* Mobile logo */}
             <Link href="/landing" className="flex items-center gap-2 mb-8 lg:hidden">
               <Scale className="w-5 h-5 text-indigo-400" />
-              <b className="tracking-[0.14em] text-white text-sm">SAKSHYA</b>
+              <b className="tracking-[0.14em] text-slate-900 text-sm">SAKSHYA</b>
             </Link>
 
             <div>
               <p className="page-eyebrow mb-3">Secure Access</p>
-              <h2 className="text-2xl font-black" style={{ color: "#e8edf5" }}>Welcome back.</h2>
+              <h2 className="text-2xl font-black" style={{ color: "#0F1535" }}>Welcome back.</h2>
               <p className="text-sm mt-1.5" style={{ color: "var(--text-secondary)" }}>
                 Sign in to continue to the regulatory workspace.
               </p>
@@ -156,7 +156,7 @@ export default function LoginPage() {
             {/* Fields */}
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-600 mb-1.5">
                   Official Email
                 </label>
                 <input
@@ -169,7 +169,7 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-600 mb-1.5">
                   Password
                 </label>
                 <div className="relative">
@@ -183,7 +183,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setShowPass(!showPass)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
                   >
                     {showPass ? (
                       <EyeOff className="w-4 h-4" />
@@ -198,7 +198,7 @@ export default function LoginPage() {
             {/* Error */}
             {error && (
               <div
-                className="rounded-xl p-3 text-xs text-rose-300"
+                className="rounded-xl p-3 text-xs text-rose-700"
                 style={{
                   background: "rgba(244,63,94,0.08)",
                   border: "1px solid rgba(244,63,94,0.25)",
@@ -223,11 +223,11 @@ export default function LoginPage() {
             <div
               className="rounded-xl p-3.5 flex items-start gap-2.5 text-xs"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "rgba(15,21,53,0.048)",
+                border: "1px solid rgba(15,21,53,0.112)",
               }}
             >
-              <LockKeyhole className="w-3.5 h-3.5 text-indigo-400 mt-0.5 shrink-0" />
+              <LockKeyhole className="w-3.5 h-3.5 text-indigo-700 mt-0.5 shrink-0" />
               <span className="text-slate-500">
                 Demo officer credentials are pre-filled. Production use requires
                 approved SSO authentication.

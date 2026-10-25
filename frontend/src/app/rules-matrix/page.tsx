@@ -59,11 +59,11 @@ export default function RulesMatrixPage() {
   };
 
   const CATEGORY_COLORS: Record<string, string> = {
-    LAND: "#f59e0b",
+    LAND: "#B45309",
     FACULTY: "#a855f7",
-    DOCUMENTS: "#22d3ee",
+    DOCUMENTS: "#0891B2",
     INFRASTRUCTURE: "#6366f1",
-    FINANCE: "#10b981",
+    FINANCE: "#059669",
   };
 
   return (
@@ -85,9 +85,9 @@ export default function RulesMatrixPage() {
           <ApplicationPicker value={applicationId} onChange={setApplicationId} />
         </div>
 
-        <div className="rounded-xl p-5" style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-sm font-bold text-white">Selected Institution: Z3 Assessment</h2><p className="mt-1 text-xs text-slate-500">Live rule evaluation for {applicationId}</p></div><span className={`badge ${assessment?.audit_report?.overall_status === "COMPLIANT" ? "badge-emerald" : "badge-rose"}`}>{assessment?.audit_report?.overall_status ?? "RUNNING"}</span></div>
-          {assessment?.audit_report?.results && <div className="mt-4 grid gap-2 md:grid-cols-2">{assessment.audit_report.results.map((result: any) => <div key={result.rule_id} className="rounded-lg border border-white/5 bg-black/20 p-3"><div className="flex justify-between gap-2"><span className="text-xs font-semibold text-slate-200">{result.rule_title}</span><span className={`badge ${result.status === "COMPLIANT" ? "badge-emerald" : "badge-rose"}`}>{result.status}</span></div><p className="mt-1 text-[11px] text-slate-500">{result.explanation}</p></div>)}</div>}
+        <div className="rounded-xl p-5" style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}>
+          <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-sm font-bold text-slate-900">Selected Institution: Z3 Assessment</h2><p className="mt-1 text-xs text-slate-500">Live rule evaluation for {applicationId}</p></div><span className={`badge ${assessment?.audit_report?.overall_status === "COMPLIANT" ? "badge-emerald" : "badge-rose"}`}>{assessment?.audit_report?.overall_status ?? "RUNNING"}</span></div>
+          {assessment?.audit_report?.results && <div className="mt-4 grid gap-2 md:grid-cols-2">{assessment.audit_report.results.map((result: any) => <div key={result.rule_id} className="rounded-lg border border-slate-900/10 bg-slate-900/5 p-3"><div className="flex justify-between gap-2"><span className="text-xs font-semibold text-slate-800">{result.rule_title}</span><span className={`badge ${result.status === "COMPLIANT" ? "badge-emerald" : "badge-rose"}`}>{result.status}</span></div><p className="mt-1 text-[11px] text-slate-500">{result.explanation}</p></div>)}</div>}
         </div>
 
         {/* ── Conflict banners ─────────────────────── */}
@@ -95,19 +95,19 @@ export default function RulesMatrixPage() {
           <div
             key={conf.conflict_id}
             className="rounded-xl p-5 space-y-4"
-            style={{ background: "rgba(245,158,11,0.05)", border: "1px solid rgba(245,158,11,0.2)" }}
+            style={{ background: "rgba(180,83,9,0.05)", border: "1px solid rgba(180,83,9,0.2)" }}
           >
             {/* Conflict header */}
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="flex items-start gap-3">
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
-                  style={{ background: "rgba(245,158,11,0.12)" }}
+                  style={{ background: "rgba(180,83,9,0.12)" }}
                 >
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
+                  <AlertTriangle className="w-4 h-4 text-amber-700" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-amber-200">
+                  <h3 className="text-sm font-bold text-amber-800">
                     Regulatory Ambiguity · {conf.conflict_id}
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5">
@@ -122,8 +122,8 @@ export default function RulesMatrixPage() {
                   className="badge"
                   style={
                     conf.override_active
-                      ? { background: "rgba(16,185,129,0.1)", color: "#6ee7b7", border: "1px solid rgba(16,185,129,0.25)" }
-                      : { background: "rgba(245,158,11,0.1)", color: "#fcd34d", border: "1px solid rgba(245,158,11,0.25)" }
+                      ? { background: "rgba(16,185,129,0.1)", color: "#047857", border: "1px solid rgba(16,185,129,0.25)" }
+                      : { background: "rgba(180,83,9,0.1)", color: "#92400E", border: "1px solid rgba(180,83,9,0.25)" }
                   }
                 >
                   {conf.override_active ? "OVERRIDE RECORDED" : "AWAITING OVERRIDE"}
@@ -141,7 +141,7 @@ export default function RulesMatrixPage() {
               </div>
             </div>
 
-            <p className="text-xs text-slate-400 leading-relaxed">{conf.explanation}</p>
+            <p className="text-xs text-slate-600 leading-relaxed">{conf.explanation}</p>
 
             {/* Rule comparison */}
             <div className="grid md:grid-cols-2 gap-3">
@@ -152,13 +152,13 @@ export default function RulesMatrixPage() {
                 <div
                   key={id}
                   className="rounded-xl p-4 space-y-1.5"
-                  style={{ background: "rgba(0,0,0,0.25)", border: "1px solid rgba(255,255,255,0.06)" }}
+                  style={{ background: "rgba(0,0,0,0.25)", border: "1px solid rgba(15,21,53,0.096)" }}
                 >
-                  <div className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider">
+                  <div className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">
                     {label}
                   </div>
-                  <div className="font-mono text-xs text-slate-200 font-semibold">{id}</div>
-                  <div className="text-[11px] text-slate-400 leading-relaxed">{clause}</div>
+                  <div className="font-mono text-xs text-slate-800 font-semibold">{id}</div>
+                  <div className="text-[11px] text-slate-600 leading-relaxed">{clause}</div>
                 </div>
               ))}
             </div>
@@ -167,13 +167,13 @@ export default function RulesMatrixPage() {
             {conf.counterexample_model && (
               <div
                 className="rounded-xl p-4 flex items-start gap-3"
-                style={{ background: "rgba(245,158,11,0.07)", border: "1px solid rgba(245,158,11,0.18)" }}
+                style={{ background: "rgba(180,83,9,0.07)", border: "1px solid rgba(180,83,9,0.18)" }}
               >
-                <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <p className="text-xs text-amber-200 leading-relaxed">
+                <Sparkles className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <p className="text-xs text-amber-800 leading-relaxed">
                   <span className="font-bold">Z3 Counterexample: </span>
                   At parameter value{" "}
-                  <span className="font-mono font-bold text-white">
+                  <span className="font-mono font-bold text-slate-900">
                     {conf.counterexample_model.counterexample_value} Acres
                   </span>
                   , an application satisfies Circular B but violates Handbook Rule A. The system
@@ -187,13 +187,13 @@ export default function RulesMatrixPage() {
         {/* ── Rules table ─────────────────────────── */}
         <div
           className="rounded-xl overflow-hidden"
-          style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
         >
           <div
             className="px-6 py-4"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
           >
-            <h2 className="text-sm font-bold text-white">Active Regulatory Rule Matrix</h2>
+            <h2 className="text-sm font-bold text-slate-900">Active Regulatory Rule Matrix</h2>
             <p className="text-xs text-slate-500 mt-0.5">
               Formal logic representations evaluated across all applicant institutions
             </p>
@@ -226,7 +226,7 @@ export default function RulesMatrixPage() {
                       return (
                         <tr key={r.rule_id}>
                           <td className="pl-6 pr-4">
-                            <span className="font-mono text-xs font-bold text-indigo-400">
+                            <span className="font-mono text-xs font-bold text-indigo-700">
                               {r.rule_id}
                             </span>
                           </td>
@@ -243,7 +243,7 @@ export default function RulesMatrixPage() {
                             </span>
                           </td>
                           <td className="pr-4">
-                            <span className="font-mono text-xs text-slate-300">
+                            <span className="font-mono text-xs text-slate-700">
                               {r.variable_name} {r.operator} {JSON.stringify(r.target_value)}
                             </span>
                           </td>
@@ -273,24 +273,24 @@ export default function RulesMatrixPage() {
           <div className="modal-box">
             <div
               className="flex items-center justify-between pb-4 mb-5"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+              style={{ borderBottom: "1px solid rgba(15,21,53,0.112)" }}
             >
               <div>
-                <h3 className="font-bold text-white">Record Precedence Override</h3>
+                <h3 className="font-bold text-slate-900">Record Precedence Override</h3>
                 <p className="text-xs text-slate-500 mt-0.5 font-mono">
                   {activeConflict.conflict_id}
                 </p>
               </div>
               <button
                 onClick={() => setModalOpen(false)}
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/10"
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-900/5"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="space-y-3 mb-5">
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600">
                 Select which rule takes statutory precedence:
               </p>
               {[
@@ -307,10 +307,10 @@ export default function RulesMatrixPage() {
                   key={id}
                   className="flex items-start gap-3 rounded-xl p-4 cursor-pointer transition"
                   style={{
-                    background: winner === id ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.03)",
+                    background: winner === id ? "rgba(99,102,241,0.1)" : "rgba(15,21,53,0.048)",
                     border: winner === id
                       ? "1px solid rgba(99,102,241,0.35)"
-                      : "1px solid rgba(255,255,255,0.07)",
+                      : "1px solid rgba(15,21,53,0.112)",
                   }}
                 >
                   <input
@@ -322,7 +322,7 @@ export default function RulesMatrixPage() {
                     className="mt-0.5 accent-indigo-500"
                   />
                   <div>
-                    <div className="text-xs font-semibold text-white">{label}</div>
+                    <div className="text-xs font-semibold text-slate-900">{label}</div>
                     <div className="text-[10px] font-mono text-slate-500 mt-0.5">{id}</div>
                   </div>
                 </label>
@@ -330,7 +330,7 @@ export default function RulesMatrixPage() {
             </div>
 
             <div className="mb-5">
-              <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+              <label className="block text-xs text-slate-600 mb-1.5 font-medium">
                 Administrative Justification
               </label>
               <input
@@ -344,7 +344,7 @@ export default function RulesMatrixPage() {
 
             <div
               className="flex justify-end gap-2.5 pt-4"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+              style={{ borderTop: "1px solid rgba(15,21,53,0.112)" }}
             >
               <button onClick={() => setModalOpen(false)} className="btn btn-ghost">
                 Cancel

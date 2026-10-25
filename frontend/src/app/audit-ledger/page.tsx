@@ -55,14 +55,14 @@ const NOTICES = [
 
 const LOG_ICON: Record<string, React.ReactNode> = {
   system: <Scale className="w-3.5 h-3.5 text-indigo-400" />,
-  officer: <UserCheck className="w-3.5 h-3.5 text-cyan-400" />,
-  notice: <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />,
+  officer: <UserCheck className="w-3.5 h-3.5 text-cyan-700" />,
+  notice: <AlertTriangle className="w-3.5 h-3.5 text-amber-700" />,
 };
 
 const LOG_COLOR: Record<string, string> = {
   system: "rgba(99,102,241,0.12)",
   officer: "rgba(34,211,238,0.12)",
-  notice: "rgba(245,158,11,0.12)",
+  notice: "rgba(180,83,9,0.12)",
 };
 
 export default function AuditLedgerPage() {
@@ -117,14 +117,14 @@ export default function AuditLedgerPage() {
         {/* ── Notices ─────────────────────────────── */}
         <div
           className="rounded-xl overflow-hidden"
-          style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
         >
           <div
             className="flex items-center justify-between px-6 py-4"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
           >
             <div>
-              <h2 className="text-sm font-bold text-white">Issued Deficiency Notices</h2>
+              <h2 className="text-sm font-bold text-slate-900">Issued Deficiency Notices</h2>
               <p className="text-xs text-slate-500 mt-0.5">
                 Formal legal notices requiring applicant rectification
               </p>
@@ -138,25 +138,25 @@ export default function AuditLedgerPage() {
                 key={n.id}
                 className="rounded-xl p-5 space-y-4"
                 style={{
-                  background: "rgba(245,158,11,0.04)",
-                  border: "1px solid rgba(245,158,11,0.18)",
+                  background: "rgba(180,83,9,0.04)",
+                  border: "1px solid rgba(180,83,9,0.18)",
                 }}
               >
                 <div
                   className="flex flex-wrap items-start justify-between gap-3 pb-3"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                  style={{ borderBottom: "1px solid rgba(15,21,53,0.08)" }}
                 >
                   <div>
-                    <span className="font-mono text-indigo-400 font-bold text-xs">
+                    <span className="font-mono text-indigo-700 font-bold text-xs">
                       {n.id}
                     </span>
-                    <h4 className="font-semibold text-sm text-white mt-0.5">
+                    <h4 className="font-semibold text-sm text-slate-900 mt-0.5">
                       {n.institution}
                     </h4>
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] text-slate-500">Rectification Deadline</div>
-                    <div className="font-mono font-bold text-rose-400 text-xs mt-0.5">
+                    <div className="font-mono font-bold text-rose-600 text-xs mt-0.5">
                       {n.deadline}
                     </div>
                   </div>
@@ -168,10 +168,10 @@ export default function AuditLedgerPage() {
                   </p>
                   <ul className="space-y-1.5">
                     {n.deficiencies.map((d, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-700">
                         <span
                           className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
-                          style={{ background: "#f59e0b" }}
+                          style={{ background: "#B45309" }}
                         />
                         {d}
                       </li>
@@ -186,13 +186,13 @@ export default function AuditLedgerPage() {
         {/* ── Audit log ─────────────────────────────── */}
         <div
           className="rounded-xl overflow-hidden"
-          style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
         >
           <div
             className="px-6 py-4"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
           >
-            <h2 className="text-sm font-bold text-white">Immutable Event Log</h2>
+            <h2 className="text-sm font-bold text-slate-900">Immutable Event Log</h2>
             <p className="text-xs text-slate-500 mt-0.5">
               {source === "live" ? "Live append-only trail for the selected application" : "Demo trail shown until the API records an event"}
             </p>
@@ -203,7 +203,7 @@ export default function AuditLedgerPage() {
               <div
                 key={`${log.id}-${log.timestamp}-${index}`}
                 className="flex items-start gap-4 rounded-xl p-4 transition"
-                style={{ border: "1px solid rgba(255,255,255,0.05)" }}
+                style={{ border: "1px solid rgba(15,21,53,0.08)" }}
               >
                 {/* Icon dot */}
                 <div
@@ -215,14 +215,14 @@ export default function AuditLedgerPage() {
 
                 <div className="flex-1 min-w-0 space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[10px] font-bold text-indigo-400">
+                    <span className="font-mono text-[10px] font-bold text-indigo-700">
                       {log.id}
                     </span>
                     <span className="badge badge-slate">{log.role}</span>
                     <span className="text-[10px] text-slate-600">{log.timestamp}</span>
                   </div>
-                  <div className="text-xs font-semibold text-white">{log.action}</div>
-                  <p className="text-xs text-slate-400 leading-relaxed">{log.details}</p>
+                  <div className="text-xs font-semibold text-slate-900">{log.action}</div>
+                  <p className="text-xs text-slate-600 leading-relaxed">{log.details}</p>
                 </div>
 
                 <div
@@ -230,7 +230,7 @@ export default function AuditLedgerPage() {
                   style={{
                     background: "rgba(99,102,241,0.1)",
                     border: "1px solid rgba(99,102,241,0.18)",
-                    color: "#a5b4fc",
+                    color: "#4338CA",
                   }}
                 >
                   {log.target.split(":")[1] ?? log.target}

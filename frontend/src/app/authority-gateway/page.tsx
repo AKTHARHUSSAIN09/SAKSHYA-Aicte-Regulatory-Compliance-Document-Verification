@@ -56,9 +56,9 @@ const FEEDS = [
 ];
 
 const STATUS_CONFIG: Record<string, { color: string; bg: string; border: string; icon: React.FC<any> }> = {
-  VERIFIED:               { color: "#10b981", bg: "rgba(16,185,129,0.08)",  border: "rgba(16,185,129,0.2)",  icon: CheckCircle2 },
+  VERIFIED:               { color: "#059669", bg: "rgba(16,185,129,0.08)",  border: "rgba(16,185,129,0.2)",  icon: CheckCircle2 },
   MISMATCH_DETECTED:      { color: "#f43f5e", bg: "rgba(244,63,94,0.08)",   border: "rgba(244,63,94,0.2)",   icon: XCircle },
-  MANUAL_REVIEW_REQUIRED: { color: "#f59e0b", bg: "rgba(245,158,11,0.08)",  border: "rgba(245,158,11,0.2)",  icon: AlertTriangle },
+  MANUAL_REVIEW_REQUIRED: { color: "#B45309", bg: "rgba(180,83,9,0.08)",  border: "rgba(180,83,9,0.2)",  icon: AlertTriangle },
 };
 
 export default function AuthorityGatewayPage() {
@@ -118,13 +118,13 @@ export default function AuthorityGatewayPage() {
         {/* ── Live sandbox ─────────────────────────── */}
         <div
           className="rounded-xl overflow-hidden"
-          style={{ background: "var(--bg-surface)", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}
         >
           <div
             className="px-6 py-4"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
           >
-            <h2 className="text-sm font-bold text-white">Live Authority Query Sandbox</h2>
+            <h2 className="text-sm font-bold text-slate-900">Live Authority Query Sandbox</h2>
             <p className="text-xs text-slate-500 mt-0.5">
               Query official state registries with live parameters
             </p>
@@ -133,7 +133,7 @@ export default function AuthorityGatewayPage() {
           <div className="p-6 space-y-5">
             <div className="grid sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+                <label className="block text-xs text-slate-600 mb-1.5 font-medium">
                   Survey / Khasra Identifier
                 </label>
                 <input
@@ -144,7 +144,7 @@ export default function AuthorityGatewayPage() {
                 />
               </div>
               <div>
-                <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+                <label className="block text-xs text-slate-600 mb-1.5 font-medium">
                   Claimed Land Acreage
                 </label>
                 <input
@@ -171,15 +171,15 @@ export default function AuthorityGatewayPage() {
               <div
                 className="rounded-xl p-5 space-y-3"
                 style={{
-                  background: STATUS_CONFIG[liveResult.status]?.bg ?? "rgba(255,255,255,0.03)",
-                  border: `1px solid ${STATUS_CONFIG[liveResult.status]?.border ?? "rgba(255,255,255,0.08)"}`,
+                  background: STATUS_CONFIG[liveResult.status]?.bg ?? "rgba(15,21,53,0.048)",
+                  border: `1px solid ${STATUS_CONFIG[liveResult.status]?.border ?? "rgba(15,21,53,0.128)"}`,
                 }}
               >
                 <div
                   className="flex items-center justify-between pb-3"
-                  style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                  style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
                 >
-                  <span className="text-xs font-bold text-white">
+                  <span className="text-xs font-bold text-slate-900">
                     Response from {liveResult.authority}
                   </span>
                   <span
@@ -187,17 +187,17 @@ export default function AuthorityGatewayPage() {
                     style={{
                       background: STATUS_CONFIG[liveResult.status]
                         ? `${STATUS_CONFIG[liveResult.status].color}18`
-                        : "rgba(255,255,255,0.08)",
-                      color: STATUS_CONFIG[liveResult.status]?.color ?? "#94a3b8",
-                      border: `1px solid ${STATUS_CONFIG[liveResult.status]?.color ?? "#94a3b8"}30`,
+                        : "rgba(15,21,53,0.128)",
+                      color: STATUS_CONFIG[liveResult.status]?.color ?? "#64748B",
+                      border: `1px solid ${STATUS_CONFIG[liveResult.status]?.color ?? "#64748B"}30`,
                     }}
                   >
                     {liveResult.status}
                   </span>
                 </div>
-                <p className="text-xs text-slate-300">{liveResult.notes}</p>
+                <p className="text-xs text-slate-700">{liveResult.notes}</p>
                 <pre
-                  className="rounded-lg p-3 text-[11px] font-mono text-slate-400 overflow-x-auto leading-relaxed"
+                  className="rounded-lg p-3 text-[11px] font-mono text-slate-600 overflow-x-auto leading-relaxed"
                   style={{ background: "rgba(0,0,0,0.3)" }}
                 >
                   {JSON.stringify(liveResult.registry_data, null, 2)}
@@ -209,7 +209,7 @@ export default function AuthorityGatewayPage() {
 
         {/* ── Verification records ─────────────────── */}
         <div>
-          <h2 className="text-sm font-bold text-white mb-4">
+          <h2 className="text-sm font-bold text-slate-900 mb-4">
             Recent Statutory Verification Records
           </h2>
           <div className="space-y-4">
@@ -221,14 +221,14 @@ export default function AuthorityGatewayPage() {
                   key={feed.id}
                   className="rounded-xl overflow-hidden"
                   style={{
-                    background: cfg?.bg ?? "rgba(255,255,255,0.03)",
-                    border: `1px solid ${cfg?.border ?? "rgba(255,255,255,0.08)"}`,
+                    background: cfg?.bg ?? "rgba(15,21,53,0.048)",
+                    border: `1px solid ${cfg?.border ?? "rgba(15,21,53,0.128)"}`,
                   }}
                 >
                   {/* Card header */}
                   <div
                     className="flex flex-wrap items-start justify-between gap-3 px-5 py-4"
-                    style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                    style={{ borderBottom: "1px solid rgba(15,21,53,0.08)" }}
                   >
                     <div className="flex items-start gap-3">
                       <div
@@ -238,10 +238,10 @@ export default function AuthorityGatewayPage() {
                         <Building2 className="w-4 h-4" style={{ color: cfg?.color }} />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white">{feed.authority}</h4>
+                        <h4 className="text-sm font-bold text-slate-900">{feed.authority}</h4>
                         <div className="text-[11px] text-slate-500 mt-0.5">
                           Target:{" "}
-                          <span className="font-mono text-slate-300">{feed.identifier}</span>
+                          <span className="font-mono text-slate-700">{feed.identifier}</span>
                           {" · "}
                           {feed.institution}
                         </div>
@@ -269,17 +269,17 @@ export default function AuthorityGatewayPage() {
                       <div
                         key={label}
                         className="rounded-xl p-4 space-y-2"
-                        style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.05)" }}
+                        style={{ background: "rgba(0,0,0,0.2)", border: "1px solid rgba(15,21,53,0.08)" }}
                       >
                         <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                           {label}
                         </div>
                         {data ? (
-                          <pre className="text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed whitespace-pre-wrap">
+                          <pre className="text-[11px] font-mono text-slate-700 overflow-x-auto leading-relaxed whitespace-pre-wrap">
                             {JSON.stringify(data, null, 2)}
                           </pre>
                         ) : (
-                          <div className="text-xs text-amber-400 italic py-1">
+                          <div className="text-xs text-amber-700 italic py-1">
                             Database record unavailable. Routed to officer queue.
                           </div>
                         )}
@@ -293,8 +293,8 @@ export default function AuthorityGatewayPage() {
                       className="mx-5 mb-5 rounded-xl p-3.5 text-xs leading-relaxed"
                       style={{ background: "rgba(244,63,94,0.07)", border: "1px solid rgba(244,63,94,0.18)" }}
                     >
-                      <span className="font-semibold text-rose-300">Registry Discrepancy: </span>
-                      <span className="text-slate-300">{feed.mismatch}</span>
+                      <span className="font-semibold text-rose-700">Registry Discrepancy: </span>
+                      <span className="text-slate-700">{feed.mismatch}</span>
                     </div>
                   )}
                 </div>
