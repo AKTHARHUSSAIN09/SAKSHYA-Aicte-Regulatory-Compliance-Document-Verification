@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { API_BASE } from "@/lib/api";
 import {
-  Scale,
   Layers,
   FileSearch,
   Share2,
@@ -90,20 +89,19 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
             className="relative w-9 h-9 rounded-full flex items-center justify-center shrink-0"
             style={{
               background: "linear-gradient(135deg, #151F5C, #1E2A78, #2B3A9E)",
-              boxShadow: "0 0 0 2px rgba(30,42,120,0.18), 0 4px 14px rgba(30,42,120,0.25)",
+              boxShadow: "0 0 0 2px #F28C28, 0 4px 14px rgba(30,42,120,0.25)",
             }}
           >
-            <Scale className="w-4 h-4" style={{ color: "#ffffff" }} />
+            <img src="/witness-eye.svg" alt="Sakshya Witness Eye" className="w-7 h-7 object-contain" />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span
                 className="font-black text-base tracking-[0.22em] leading-none"
                 style={{
-                  background: "linear-gradient(90deg, #1E2A78, #3347B0, #F28C28)",
+                  background: "linear-gradient(90deg, #1E2A78, #3347B0)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 0 8px rgba(30,42,120,0.28))",
                 }}
               >
                 SAKSHYA
@@ -262,8 +260,8 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         <header
           className="sticky top-0 z-30 h-13 flex items-center px-5 xl:px-8 gap-4"
           style={{
-            background: "rgba(3,7,15,0.88)",
-            borderBottom: "1px solid rgba(30,42,120,0.07)",
+            background: "rgba(255,255,255,0.88)",
+            borderBottom: "1px solid rgba(15,21,53,0.08)",
             backdropFilter: "blur(18px)",
             height: "3.25rem",
           }}
