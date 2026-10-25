@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+frontend/out/
+
+# Python cache & virtual environment
+__pycache__/
+*.py[cod]
+*$py.class
+backend/__pycache__/
+backend/**/__pycache__/
+.pytest_cache/
+backend/.pytest_cache/
+venv/
+.venv/
+.env*
+!.env.example
+
+# Local demo persistence and encrypted uploads — never commit keys or user evidence.
+backend/data/.local_vault_key
+backend/data/application_records.json
+backend/data/encrypted_documents/
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.log
