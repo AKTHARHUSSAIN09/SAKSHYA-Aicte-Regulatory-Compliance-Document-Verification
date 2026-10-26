@@ -169,13 +169,13 @@ export default function LandingPage() {
         <div className="relative self-center">
           <div
             className="absolute -inset-8 rounded-[2rem] blur-3xl"
-            style={{ background: "rgba(99,102,241,0.12)" }}
+            style={{ background: "rgba(99,102,241,0.18)" }}
           />
           <div
             className="relative rounded-2xl p-5 space-y-4"
             style={{
-              background: "rgba(11,17,32,0.9)",
-              border: "1px solid rgba(15,21,53,0.128)",
+              background: "rgba(11,17,32,0.95)",
+              border: "1px solid rgba(255,255,255,0.15)",
               boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
               backdropFilter: "blur(16px)",
             }}
@@ -183,18 +183,18 @@ export default function LandingPage() {
             {/* Card header */}
             <div
               className="flex items-center justify-between pb-4"
-              style={{ borderBottom: "1px solid rgba(15,21,53,0.096)" }}
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
             >
               <div className="flex items-center gap-2.5">
                 <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ background: "#059669", boxShadow: "0 0 6px #059669" }}
+                  className="w-2.5 h-2.5 rounded-full"
+                  style={{ background: "#10b981", boxShadow: "0 0 8px #10b981" }}
                 />
-                <span className="text-xs font-bold" style={{ color: "#0F1535" }}>
+                <span className="text-xs font-bold text-white tracking-wide">
                   Evidence Integrity Console
                 </span>
               </div>
-              <Binary className="w-4 h-4" style={{ color: "#1E2A78" }} />
+              <Binary className="w-4 h-4 text-indigo-400" />
             </div>
 
             {/* Check rows */}
@@ -202,28 +202,28 @@ export default function LandingPage() {
               {CHECKS.map((text, i) => (
                 <div
                   key={text}
-                  className="flex items-center gap-3 rounded-xl p-3.5"
+                  className="flex items-center gap-3 rounded-xl p-3.5 transition"
                   style={{
-                    background: "rgba(0,0,0,0.25)",
-                    border: "1px solid rgba(15,21,53,0.08)",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
                   }}
                 >
                   <span
                     className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
                     style={
                       i === 1
-                        ? { background: "rgba(180,83,9,0.12)" }
-                        : { background: "rgba(16,185,129,0.1)" }
+                        ? { background: "rgba(245,158,11,0.18)" }
+                        : { background: "rgba(16,185,129,0.18)" }
                     }
                   >
                     <FileCheck2
                       className="w-4 h-4"
-                      style={{ color: i === 1 ? "#B45309" : "#059669" }}
+                      style={{ color: i === 1 ? "#fbbf24" : "#34d399" }}
                     />
                   </span>
                   <div>
-                    <p className="text-xs font-semibold text-slate-800">{text}</p>
-                    <p className="text-[10px] text-slate-500 mt-0.5">
+                    <p className="text-xs font-semibold text-white">{text}</p>
+                    <p className="text-[10px] text-slate-300 mt-0.5">
                       Source anchored · Officer review ready
                     </p>
                   </div>
@@ -235,17 +235,16 @@ export default function LandingPage() {
             <div
               className="rounded-xl p-4"
               style={{
-                background: "linear-gradient(90deg, rgba(30,42,120,0.18), rgba(30,42,120,0.08))",
-                border: "1px solid rgba(30,42,120,0.22)",
+                background: "linear-gradient(90deg, rgba(79,70,229,0.3), rgba(59,130,246,0.18))",
+                border: "1px solid rgba(129,140,248,0.35)",
               }}
             >
               <p
-                className="text-[9px] font-bold uppercase tracking-widest"
-                style={{ color: "#1E2A78" }}
+                className="text-[9px] font-bold uppercase tracking-widest text-indigo-300"
               >
                 Decision Posture
               </p>
-              <p className="text-base font-bold mt-1" style={{ color: "#0F1535" }}>
+              <p className="text-base font-bold mt-1 text-white">
                 Human authority preserved
               </p>
             </div>
@@ -260,8 +259,9 @@ export default function LandingPage() {
             key={title}
             className="rounded-xl p-6 space-y-4"
             style={{
-              background: "rgba(11,17,32,0.7)",
-              border: "1px solid rgba(15,21,53,0.096)",
+              background: "#FFFFFF",
+              border: "1px solid rgba(15,21,53,0.08)",
+              boxShadow: "0 4px 24px rgba(15,21,53,0.04)",
             }}
           >
             <div
@@ -270,7 +270,7 @@ export default function LandingPage() {
             >
               <Icon className="w-5 h-5" style={{ color }} />
             </div>
-            <h2 className="font-bold text-slate-900">{title}</h2>
+            <h2 className="font-bold text-slate-900 text-base">{title}</h2>
             <p className="text-sm leading-relaxed text-slate-600">{body}</p>
           </article>
         ))}

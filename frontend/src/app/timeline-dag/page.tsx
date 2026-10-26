@@ -36,8 +36,64 @@ export default function TimelineDAGPage() {
       <div><h2 className="text-sm font-bold" style={{ color: valid ? "#047857" : "#BE123C" }}>{valid ? "Chronologically Valid Timeline" : `${timeline?.report.anomalies_count ?? 0} chronological anomalies detected`}</h2><p className="mt-1 text-xs text-slate-600">{timeline ? `Live analysis for ${applicationId}.` : "Loading live timeline analysis…"}</p></div>
     </div>
     {error && <div role="alert" className="rounded-xl p-4 text-xs text-rose-800" style={{ background: "rgba(244,63,94,0.08)", border: "1px solid rgba(244,63,94,0.22)" }}>{error}</div>}
-    <div className="rounded-xl p-6" style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}><div className="mb-6 flex items-center justify-between border-b border-slate-900/10 pb-4"><span className="text-sm font-bold text-slate-900">Chronological Directed Acyclic Graph</span><span className="font-mono text-[10px] text-slate-500">{timeline?.events.length ?? 0} milestones evaluated</span></div>
-      <div className="relative space-y-4 pl-10 timeline-line">{timeline?.events.map((event) => { const anomalies = anomaliesFor(event.event_id); const flagged = anomalies.length > 0; return <div key={event.event_id} className="relative flex items-start gap-5"><div className="absolute -left-10 z-10 flex h-7 w-7 items-center justify-center rounded-full border-2 text-[10px] font-black" style={{ background: flagged ? "rgba(244,63,94,0.15)" : "rgba(16,185,129,0.12)", borderColor: flagged ? "rgba(244,63,94,0.6)" : "rgba(16,185,129,0.5)", color: flagged ? "#BE123C" : "#047857" }}>{flagged ? "!" : "✓"}</div><div className="flex-1 rounded-xl p-4" style={{ background: flagged ? "rgba(244,63,94,0.05)" : "rgba(15,21,53,0.04)", border: `1px solid ${flagged ? "rgba(244,63,94,0.18)" : "rgba(15,21,53,0.08)"}` }}><div className="flex flex-wrap items-center justify-between gap-2"><div><div className="text-sm font-semibold text-slate-900">{event.entity_name}</div><div className="mt-1 flex items-center gap-2 text-[10px] font-mono text-slate-500"><Calendar className="h-3 w-3" />{event.start_date}{event.end_date ? ` → ${event.end_date}` : ""} · {event.document_ref}</div></div><span className={`badge ${flagged ? "badge-rose" : "badge-emerald"}`}>{flagged ? "FLAGGED" : "VALID"}</span></div>{anomalies.map((anomaly, index) => <p key={index} className="mt-3 rounded-lg border border-rose-500/20 bg-rose-500/5 p-3 text-xs text-slate-700">{anomaly.explanation ?? "Chronological inconsistency detected."}</p>)}</div></div>; })}</div>
+    <div className="rounded-xl p-6" style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}>
+      <div className="mb-6 flex items-center justify-between border-b border-slate-900/10 pb-4">
+        <span className="text-sm font-bold text-slate-900">Chronological Directed Acyclic Graph</span>
+        <span className="font-mono text-[10px] text-slate-500">{timeline?.events.length ?? 0} milestones evaluated</span>
+      </div>
+      <div className="relative space-y-5">
+        {/* Continuous line passing right through the center of every circle */}
+        <div
+          className="absolute left-[15px] top-4 bottom-4 w-[2px] -translate-x-1/2 pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, rgba(30,42,120,0.18) 0%, rgba(30,42,120,0.3) 50%, rgba(30,42,120,0.1) 100%)" }}
+        />
+        {timeline?.events.map((event) => {
+          const anomalies = anomaliesFor(event.event_id);
+          const flagged = anomalies.length > 0;
+          return (
+            <div key={event.event_id} className="relative flex items-start gap-4">
+              {/* Circle indicator - exactly 30px x 30px with center at 15px */}
+              <div
+                className="relative z-10 flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full border-2 text-xs font-black"
+                style={{
+                  background: flagged ? "#FFF1F2" : "#ECFDF5",
+                  borderColor: flagged ? "#E11D48" : "#10B981",
+                  color: flagged ? "#BE123C" : "#047857",
+                  boxShadow: "0 0 0 4px #FFFFFF, 0 2px 6px rgba(0,0,0,0.06)",
+                }}
+              >
+                {flagged ? "!" : "✓"}
+              </div>
+              <div
+                className="flex-1 rounded-xl p-4"
+                style={{
+                  background: flagged ? "rgba(244,63,94,0.05)" : "#FFFFFF",
+                  border: `1px solid ${flagged ? "rgba(244,63,94,0.22)" : "rgba(15,21,53,0.08)"}`,
+                  boxShadow: "0 2px 8px rgba(15,21,53,0.03)",
+                }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <div className="text-sm font-semibold text-slate-900">{event.entity_name}</div>
+                    <div className="mt-1 flex items-center gap-2 text-[10px] font-mono text-slate-500">
+                      <Calendar className="h-3 w-3" />
+                      {event.start_date}{event.end_date ? ` → ${event.end_date}` : ""} · {event.document_ref}
+                    </div>
+                  </div>
+                  <span className={`badge ${flagged ? "badge-rose" : "badge-emerald"}`}>
+                    {flagged ? "FLAGGED" : "VALID"}
+                  </span>
+                </div>
+                {anomalies.map((anomaly, index) => (
+                  <p key={index} className="mt-3 rounded-lg border border-rose-500/20 bg-rose-500/5 p-3 text-xs text-slate-700">
+                    {anomaly.explanation ?? "Chronological inconsistency detected."}
+                  </p>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   </div></SidebarLayout>;
 }

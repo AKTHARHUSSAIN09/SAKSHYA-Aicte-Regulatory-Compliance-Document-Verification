@@ -19,9 +19,12 @@ const TYPE_CONFIG: Record<string, { color: string; soft: string; Icon: typeof Bu
   FACULTY: { color: "#9333EA", soft: "rgba(192,132,252,0.12)", Icon: UserCheck },
 };
 
-function distribute(ids: string[], y: number, positions: Record<string, Position>) {
+const CANVAS_WIDTH = 1400;
+const CANVAS_HEIGHT = 650;
+
+function distribute(ids: string[], y: number, positions: Record<string, Position>, totalWidth = CANVAS_WIDTH) {
   ids.forEach((id, index) => {
-    positions[id] = { x: ((index + 1) * 1000) / (ids.length + 1), y };
+    positions[id] = { x: ((index + 1) * totalWidth) / (ids.length + 1), y };
   });
 }
 
@@ -32,10 +35,10 @@ function makeLayout(nodes: GraphNode[]) {
   const fields = nodes.filter((node) => node.type === "EXTRACTED_FIELD").map((node) => node.id);
   const regulations = nodes.filter((node) => node.type === "REGULATION").map((node) => node.id);
   const other = nodes.filter((node) => !["APPLICATION", "DOCUMENT", "EXTRACTED_FIELD", "REGULATION"].includes(node.type)).map((node) => node.id);
-  distribute(apps, 64, positions);
-  distribute(documents, 215, positions);
+  distribute(apps, 70, positions);
+  distribute(documents, 220, positions);
   distribute(fields, 380, positions);
-  distribute(regulations, 550, positions);
+  distribute(regulations, 560, positions);
   distribute(other, 470, positions);
   return positions;
 }
@@ -68,14 +71,113 @@ export default function EvidenceGraphPage() {
       <div className="flex flex-col gap-2 sm:flex-row"><ApplicationPicker value={applicationId} onChange={setApplicationId} /><select value={filterType} onChange={(event) => setFilterType(event.target.value)} className="field py-2 text-xs" aria-label="Highlight node type"><option value="ALL">All node types</option><option value="APPLICATION">Application</option><option value="DOCUMENT">Documents</option><option value="EXTRACTED_FIELD">Extracted fields</option><option value="REGULATION">Regulations</option></select></div>
     </div>
 
-    <div className="rounded-xl p-4 flex items-start gap-4" style={{ background: "rgba(37,99,235,0.06)", border: "1px solid rgba(37,99,235,0.18)" }}><Share2 className="h-5 w-5 shrink-0 text-blue-600" /><div><h2 className="text-sm font-bold text-blue-800">Interactive evidence chain for {applicationId}</h2><p className="mt-1 text-xs text-slate-600">Click a node to trace its connected evidence. Red edges identify an anomalous relationship; gold nodes contain extracted document fields.</p></div></div>
+    <div className="rounded-xl p-4 flex items-start gap-4" style={{ background: "rgba(37,99,235,0.06)", border: "1px solid rgba(37,99,235,0.18)" }}><Share2 className="h-5 w-5 shrink-0 text-blue-600" /><div><h2 className="text-sm font-bold text-blue-800">Interactive evidence chain for {applicationId}</h2><p className="mt-1 text-xs text-slate-600">Click any node to trace its connected evidence. Red dashed edges pinpoint anomalous relationships; pill badges clarify legal connections without clutter.</p></div></div>
 
     <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
       <section className="overflow-hidden rounded-xl" style={{ background: "var(--bg-surface)", border: "1px solid rgba(15,21,53,0.096)" }}>
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-900/10 px-5 py-4"><div><h2 className="text-sm font-bold text-slate-900">Evidence Graph Canvas</h2><p className="mt-0.5 text-[10px] text-slate-500">Application → documents → extracted facts → regulatory rules</p></div><div className="flex flex-wrap gap-3 text-[10px] text-slate-500"><span className="flex items-center gap-1.5"><i className="h-2 w-2 rounded-full bg-cyan-400" />Document</span><span className="flex items-center gap-1.5"><i className="h-2 w-2 rounded-full bg-amber-400" />Extracted fact</span><span className="flex items-center gap-1.5"><i className="h-2 w-2 rounded-full bg-emerald-400" />Regulation</span></div></div>
-        <div className="overflow-x-auto"><div className="relative min-w-[1000px]" style={{ height: "650px", background: "radial-gradient(circle at 50% 0%, rgba(37,99,235,0.08), transparent 42%), linear-gradient(rgba(15,21,53,0.029) 1px, transparent 1px), linear-gradient(90deg, rgba(15,21,53,0.029) 1px, transparent 1px)", backgroundSize: "auto, 32px 32px, 32px 32px" }}>
-          <svg viewBox="0 0 1000 650" className="absolute inset-0 h-full w-full" aria-label="Evidence graph connections"><defs><marker id="graph-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" /></marker><marker id="graph-alert-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#E11D48" /></marker></defs>{graph.edges.map((edge, index) => { const from = positions[edge.from]; const to = positions[edge.to]; if (!from || !to) return null; const active = !selectedId || edge.from === selectedId || edge.to === selectedId; const filtered = filterType === "ALL" || graph.nodes.find((node) => node.id === edge.from)?.type === filterType || graph.nodes.find((node) => node.id === edge.to)?.type === filterType; return <g key={`${edge.from}-${edge.to}-${index}`} opacity={active && filtered ? 1 : 0.12}><line x1={from.x} y1={from.y + 32} x2={to.x} y2={to.y - 32} stroke={edge.anomaly ? "#E11D48" : "#64748b"} strokeWidth={edge.anomaly ? "2.5" : "1.5"} strokeDasharray={edge.anomaly ? "7 5" : undefined} markerEnd={`url(#${edge.anomaly ? "graph-alert-arrow" : "graph-arrow"})`} /><text x={(from.x + to.x) / 2} y={(from.y + to.y) / 2 - 6} fill={edge.anomaly ? "#BE123C" : "#64748B"} textAnchor="middle" fontSize="9" fontFamily="monospace">{edge.relation}</text></g>; })}</svg>
-          {graph.nodes.map((node) => { const position = positions[node.id]; if (!position) return null; const config = TYPE_CONFIG[node.type] ?? TYPE_CONFIG.DOCUMENT; const Icon = config.Icon; const selected = node.id === selectedId; const related = relatedIds.has(node.id); const dimmed = selectedId !== null && !related; return <button key={node.id} onClick={() => setSelectedId(selected ? null : node.id)} className="absolute w-[170px] -translate-x-1/2 -translate-y-1/2 rounded-xl p-3 text-left transition duration-150" style={{ left: `${position.x / 10}%`, top: `${position.y / 6.5}%`, background: selected ? config.soft : node.flagged ? "rgba(244,63,94,0.10)" : "rgba(7,13,26,0.96)", border: `1px solid ${selected ? config.color : node.flagged ? "rgba(244,63,94,0.55)" : "rgba(15,21,53,0.16)"}`, boxShadow: selected ? `0 0 0 3px ${config.soft}, 0 10px 25px rgba(0,0,0,0.35)` : "0 7px 18px rgba(0,0,0,0.25)", opacity: visible(node) && !dimmed ? 1 : 0.25, zIndex: selected ? 20 : 10 }}><div className="flex items-start justify-between gap-2"><span className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: config.soft }}><Icon className="h-3.5 w-3.5" style={{ color: config.color }} /></span>{node.flagged && <AlertTriangle className="h-3.5 w-3.5 text-rose-600" />}</div><p className="mt-2 line-clamp-2 text-[11px] font-bold leading-snug text-slate-900">{node.label}</p><span className="mt-2 inline-flex rounded px-1.5 py-0.5 font-mono text-[8px] font-bold" style={{ color: config.color, background: config.soft }}>{node.type.replaceAll("_", " ")}</span></button>; })}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-900/10 px-5 py-4"><div><h2 className="text-sm font-bold text-slate-900">Evidence Graph Canvas</h2><p className="mt-0.5 text-[10px] text-slate-500">Application → documents → extracted facts → regulatory rules</p></div><div className="flex flex-wrap gap-3 text-[10px] text-slate-500"><span className="flex items-center gap-1.5"><i className="h-2 w-2 rounded-full bg-indigo-500" />Application</span><span className="flex items-center gap-1.5"><i className="h-2 w-2 rounded-full bg-cyan-400" />Document</span><span className="flex items-center gap-1.5"><i className="h-2 w-2 rounded-full bg-emerald-400" />Regulation</span></div></div>
+        <div className="overflow-x-auto"><div className="relative min-w-[1400px]" style={{ height: "650px", background: "radial-gradient(circle at 50% 0%, rgba(37,99,235,0.08), transparent 42%), linear-gradient(rgba(15,21,53,0.029) 1px, transparent 1px), linear-gradient(90deg, rgba(15,21,53,0.029) 1px, transparent 1px)", backgroundSize: "auto, 32px 32px, 32px 32px" }}>
+          <svg viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`} className="absolute inset-0 h-full w-full" aria-label="Evidence graph connections">
+            <defs>
+              <marker id="graph-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94A3B8" /></marker>
+              <marker id="graph-arrow-active" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4F46E5" /></marker>
+              <marker id="graph-alert-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#E11D48" /></marker>
+            </defs>
+            {graph.edges.map((edge, index) => {
+              const from = positions[edge.from];
+              const to = positions[edge.to];
+              if (!from || !to) return null;
+              const isSelected = selectedId && (edge.from === selectedId || edge.to === selectedId);
+              const active = !selectedId || isSelected;
+              const filtered = filterType === "ALL" || graph.nodes.find((node) => node.id === edge.from)?.type === filterType || graph.nodes.find((node) => node.id === edge.to)?.type === filterType;
+              
+              // Stagger label position so adjacent lines never collide
+              const offsetFactor = 0.35 + ((index % 4) * 0.12);
+              const lx = from.x + (to.x - from.x) * offsetFactor;
+              const ly = (from.y + 32) + ((to.y - 32) - (from.y + 32)) * offsetFactor;
+              const showLabel = edge.anomaly || isSelected;
+
+              return (
+                <g key={`${edge.from}-${edge.to}-${index}`} opacity={active && filtered ? 1 : 0.15}>
+                  <line
+                    x1={from.x}
+                    y1={from.y + 32}
+                    x2={to.x}
+                    y2={to.y - 32}
+                    stroke={edge.anomaly ? "#E11D48" : isSelected ? "#4F46E5" : "#94A3B8"}
+                    strokeWidth={edge.anomaly ? "2.5" : isSelected ? "2" : "1.2"}
+                    strokeDasharray={edge.anomaly ? "7 5" : undefined}
+                    markerEnd={`url(#${edge.anomaly ? "graph-alert-arrow" : isSelected ? "graph-arrow-active" : "graph-arrow"})`}
+                  />
+                  {showLabel && (
+                    <g transform={`translate(${lx}, ${ly})`}>
+                      <rect
+                        x="-50"
+                        y="-10"
+                        width="100"
+                        height="20"
+                        rx="5"
+                        fill={edge.anomaly ? "#FFE4E6" : "#FFFFFF"}
+                        stroke={edge.anomaly ? "#FDA4AF" : "#CBD5E1"}
+                        strokeWidth="1.2"
+                      />
+                      <text
+                        x="0"
+                        y="3"
+                        fill={edge.anomaly ? "#BE123C" : "#334155"}
+                        textAnchor="middle"
+                        fontSize="8.5"
+                        fontWeight="bold"
+                        fontFamily="monospace"
+                      >
+                        {edge.relation}
+                      </text>
+                    </g>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+          {graph.nodes.map((node) => {
+            const position = positions[node.id];
+            if (!position) return null;
+            const config = TYPE_CONFIG[node.type] ?? TYPE_CONFIG.DOCUMENT;
+            const Icon = config.Icon;
+            const selected = node.id === selectedId;
+            const related = relatedIds.has(node.id);
+            const dimmed = selectedId !== null && !related;
+            const isRegulation = node.type === "REGULATION";
+
+            return (
+              <button
+                key={node.id}
+                onClick={() => setSelectedId(selected ? null : node.id)}
+                className={`absolute ${isRegulation ? "w-[125px]" : "w-[160px]"} -translate-x-1/2 -translate-y-1/2 rounded-xl p-3 text-left transition duration-150`}
+                style={{
+                  left: `${(position.x / CANVAS_WIDTH) * 100}%`,
+                  top: `${(position.y / CANVAS_HEIGHT) * 100}%`,
+                  background: selected ? config.soft : node.flagged ? "rgba(244,63,94,0.15)" : "rgba(11,17,32,0.95)",
+                  border: `1.5px solid ${selected ? config.color : node.flagged ? "#E11D48" : "rgba(255,255,255,0.15)"}`,
+                  boxShadow: selected ? `0 0 0 3px ${config.soft}, 0 10px 25px rgba(0,0,0,0.35)` : "0 7px 18px rgba(0,0,0,0.25)",
+                  opacity: visible(node) && !dimmed ? 1 : 0.25,
+                  zIndex: selected ? 20 : 10,
+                }}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: config.soft }}>
+                    <Icon className="h-3.5 w-3.5" style={{ color: config.color }} />
+                  </span>
+                  {node.flagged && <AlertTriangle className="h-3.5 w-3.5 text-rose-500 shrink-0" />}
+                </div>
+                <p className="mt-2 line-clamp-2 text-[11px] font-bold leading-snug text-white">
+                  {node.label}
+                </p>
+                <span className="mt-2 inline-flex rounded px-1.5 py-0.5 font-mono text-[8px] font-bold" style={{ color: config.color, background: config.soft }}>
+                  {node.type.replaceAll("_", " ")}
+                </span>
+              </button>
+            );
+          })}
           {status === "error" && <p className="absolute inset-0 flex items-center justify-center text-sm text-rose-700">Unable to load this application&apos;s evidence graph.</p>}
         </div></div>
       </section>
